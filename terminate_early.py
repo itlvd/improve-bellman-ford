@@ -4,10 +4,14 @@ def relax(D, P,s,d,w):
         D[d] = D[s] + w
         P[d] = s
 
-def print_solution(dist, Previous, Point):
-    print("Vertex Distance from Source")
+def print_solution(Previous,dist, Point):
+    print("From source")
+    print("to\tprevious\tmin distance")
     for i in range(len(Point)):
-        print("{0}\t{1}\t{2}".format(Point[i], Point[Previous[i]], dist[i]))
+        pre = Point[Previous[i]]
+        if(Previous[i] == -1):
+            pre = -1
+        print(Point[i], '\t', pre, '\t\t\t\t', dist[i])
 
 def printPath(s,d,P,D,Point):
     now = d
@@ -15,15 +19,18 @@ def printPath(s,d,P,D,Point):
     while(now != s):
         path += Point[now] + ">-"
         now = P[now]
+        if now == -1:
+            print("Don't have solution for this path")
+            return
     path += Point[s]
     print(path[::-1], "length =", D[d])
-        
+
 
 
 
 def basicBellmanFord(start,graph, n):
     D = [float("Inf")] * n
-    P = [0] * n
+    P = [-1] * n
     D[start] = 0
     for _ in range(len(D) - 1):
         for s,d,w in graph:
@@ -70,7 +77,7 @@ def convertConvex(filename):
 
 def early_termination(start, graph, n):
     D = [float("Inf")] * n
-    P = [0] * n
+    P = [-1] * n
     D[start] = 0
     C = [start]
     while C!= None: 
@@ -92,9 +99,20 @@ def early_termination(start, graph, n):
     
         
 
-Point, graph = convertConvex("data.txt")
+#============= Setup variable
+begin = 6
+end = 0
+#=============
 start = 0
+des = 0 
+Point, graph = convertConvex("data_generate.txt")
 n = len(Point)
+for i in range(n):
+    if Point[i] == str(begin):
+        start = i;
+    if Point[i] == str(end):
+        des = i;
+
 D, P = early_termination(start,graph,n)
 printPath(start,2,P,D,Point)
 

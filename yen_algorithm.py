@@ -134,10 +134,3 @@ for i in range(n):
 D, P = Yen(start,graph,n)
 printPath(start,des,P,D,Point)
 #print_solution(P,D,Point)
-
-#Check topo sorting
-# s = sortTopo(start,graph,n)
-# print(Point)
-# print(s)
-
-

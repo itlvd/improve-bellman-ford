@@ -16,12 +16,12 @@ def printPath(s,d,P,D,Point):
     now = d
     path = ""
     while(now != s):
-        path += Point[now] + ">-"
+        path += str(Point[now])[::-1] + ">-"
         now = P[now]
         if now == -1:
             print("Don't have solution for this path")
             return
-    path += Point[s]
+    path += str(Point[s])[::-1]
     print(path[::-1], "length =", D[d])
 
 
@@ -70,12 +70,12 @@ def convertConvex(filename):
     return Point, graph
 
 #============= Setup variable
-begin = 6
-end = 0
+begin = "s"
+end = "e"
 #=============
 start = 0
 des = 0 
-Point, graph = convertConvex("data_generate.txt")
+Point, graph = convertConvex("2000node.txt")
 n = len(Point)
 for i in range(n):
     if Point[i] == str(begin):
@@ -85,6 +85,6 @@ for i in range(n):
 
 D, P = basicBellmanFord(start,graph,n)
 #print_solution(P,D,Point)
-printPath(start,des,P,D,Point)
+#printPath(start,des,P,D,Point)
 #print(Point)
 

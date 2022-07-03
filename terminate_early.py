@@ -114,6 +114,6 @@ for i in range(n):
         des = i;
 
 D, P = early_termination(start,graph,n)
-#printPath(start,2,P,D,Point)
+#printPath(start,des,P,D,Point)
 #print_solution(P,D,Point)
 

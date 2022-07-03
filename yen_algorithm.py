@@ -34,6 +34,10 @@ def Yen(start, graph, n):
     P = [-1] * n
     D[start] = 0
     C = [start]
+
+    FlagChange = [False] * n #Flag change iteration before 
+    FlagChange[start] = True
+
     listPoint = list(range(n)) # node
     reversePoint = listPoint.copy()
     reversePoint.reverse()
@@ -44,36 +48,33 @@ def Yen(start, graph, n):
 
     visited = [False] * n #kiem tra xem node da di qua chua, neu da di qua roi, thi khong quay lai, do thu tu topo khong cho phep
     visited[start] = True
-    FlagChange = [False] * n #Flag change iteration before 
-    while len(C) > 0: 
+    
+    while len(C) > 0:
         C_new = []
-
         for i, u in zip(range(n),listPoint):
             if(u in C or FlagChange[u] == True): # Co trong C hay co thay doi o vong while truoc khong
                 FlagChange[u] = False
-                for edge in graph:
-                    if(u == edge[0] and visited[edge[1]] == False): # Check ton tai canh nay khong
-                        visited[edge[1]] = True
-                        temp = D[edge[1]]
-                        relax(D,P,u,edge[1],edge[2])
-                        if(temp != D[edge[1]]):
-                            FlagChange[edge[1]] = True
-                            #if edge[1] not in C_new: 
-                            C_new.append(edge[1])
+                for s,d,w in graph:
+                    if(u == s and visited[d] == False): # Check ton tai canh nay khong
+                        visited[d] = True
+                        flag = relax(D,P,u,d,w)
+                        if(flag == True):
+                            FlagChange[d] = True
+                            if d not in C_new: 
+                                C_new.append(d)
         visited = [False] * n
 
         for i, u in zip(range(n),reversePoint):
             if(u in C or FlagChange[u] == True): # Co trong C hay co thay doi o vong while truoc khong
                 FlagChange[u] = False
-                for edge in graph:
-                    if(u == edge[0] and visited[edge[1]] == False): # Check ton tai canh nay khong
-                        visited[edge[1]] = True
-                        temp = D[edge[1]]
-                        relax(D,P,u,edge[1],edge[2])
-                        if(temp != D[edge[1]]):
-                            FlagChange[edge[1]] = True
-                            #if edge[1] not in C_new: 
-                            C_new.append(edge[1])
+                for s,d,w in graph:
+                    if(u == s and visited[d] == False): # Check ton tai canh nay khong
+                        visited[d] = True
+                        flag = relax(D,P,u,d,w)
+                        if(flag == True):
+                            FlagChange[d] = True
+                            if d not in C_new:
+                                C_new.append(d)
         C = C_new
         visited = [False] * n
     
@@ -118,11 +119,11 @@ def convertConvex(filename):
 
 #============= Setup variable
 begin = 0
-end = 244
+end = 'b'
 #=============
 start = 0
 des = 0 
-Point, graph = convertConvex("2000node.txt")
+Point, graph = convertConvex("data.txt")
 n = len(Point)
 for i in range(n):
     if Point[i] == str(begin):
@@ -131,7 +132,7 @@ for i in range(n):
         des = i;
 
 D, P = Yen(start,graph,n)
-#printPath(start,5,P,D,Point)
+printPath(start,des,P,D,Point)
 #print_solution(P,D,Point)
 
 #Check topo sorting

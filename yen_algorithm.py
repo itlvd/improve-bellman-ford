@@ -39,12 +39,12 @@ def Yen(start, graph, n):
     FlagChange[start] = True
 
     listPoint = list(range(n)) # node
-    reversePoint = listPoint.copy()
-    reversePoint.reverse()
-
     tmp = listPoint[0] #swap
     listPoint[0] = listPoint[start]
     listPoint[start] = tmp
+
+    reversePoint = listPoint.copy()
+    reversePoint.reverse()
 
     visited = [False] * n #kiem tra xem node da di qua chua, neu da di qua roi, thi khong quay lai, do thu tu topo khong cho phep
     visited[start] = True

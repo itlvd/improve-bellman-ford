@@ -70,8 +70,6 @@ def convertConvex(filename):
                 s = id_[start]
                 d = id_[end]
                 graph.append([s,d,w])
-
-
     return Point, graph
 
 

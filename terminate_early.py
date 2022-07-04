@@ -99,11 +99,11 @@ def early_termination(start, graph, n):
 
 #============= Setup variable
 begin = 0
-end = 5
+end = 155
 #=============
 start = 0
 des = 0 
-Point, graph = convertConvex("2000node.txt")
+Point, graph = convertConvex("200node.txt")
 n = len(Point)
 for i in range(n):
     if Point[i] == str(begin):
@@ -112,6 +112,6 @@ for i in range(n):
         des = i;
 
 D, P = early_termination(start,graph,n)
-#printPath(start,des,P,D,Point)
+printPath(start,des,P,D,Point)
 #print_solution(P,D,Point)
 

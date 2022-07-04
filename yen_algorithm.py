@@ -54,7 +54,7 @@ def Yen(start, graph, n):
                 FlagChange[u] = False
                 for s,d,w in graph:
                     if(u == s and visited[d] == False): # Check ton tai canh nay khong
-                        visited[d] = True
+                        visited[u] = True
                         flag = relax(D,P,u,d,w)
                         if(flag == True):
                             FlagChange[d] = True
@@ -67,7 +67,7 @@ def Yen(start, graph, n):
                 FlagChange[u] = False
                 for s,d,w in graph:
                     if(u == s and visited[d] == False): # Check ton tai canh nay khong
-                        visited[d] = True
+                        visited[u] = True
                         flag = relax(D,P,u,d,w)
                         if(flag == True):
                             FlagChange[d] = True
@@ -117,11 +117,11 @@ def convertConvex(filename):
 
 #============= Setup variable
 begin = 0
-end = 'b'
+end = 155
 #=============
 start = 0
 des = 0 
-Point, graph = convertConvex("data.txt")
+Point, graph = convertConvex("200node.txt")
 n = len(Point)
 for i in range(n):
     if Point[i] == str(begin):

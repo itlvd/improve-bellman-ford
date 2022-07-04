@@ -1,4 +1,3 @@
-from inspect import stack
 import numpy as np
 
 def relax(D, P,s,d,w):

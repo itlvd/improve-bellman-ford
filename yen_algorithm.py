@@ -1,5 +1,3 @@
-from inspect import stack
-
 
 def relax(D, P,s,d,w):
     if D[s] != float("Inf") and D[d] > D[s] + w:

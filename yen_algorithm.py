@@ -119,11 +119,11 @@ def convertConvex(filename):
 
 #============= Setup variable
 begin = 0
-end = 'b'
+end = 1999
 #=============
 start = 0
 des = 0 
-Point, graph = convertConvex("data.txt")
+Point, graph = convertConvex("2000node.txt")
 n = len(Point)
 for i in range(n):
     if Point[i] == str(begin):

@@ -1,5 +1,5 @@
 from inspect import stack
-
+import numpy as np
 
 def relax(D, P,s,d,w):
     if D[s] != float("Inf") and D[d] > D[s] + w:
@@ -43,6 +43,12 @@ def Yen(start, graph, n):
     listPoint[0] = listPoint[start]
     listPoint[start] = tmp
 
+    permute = listPoint[1:].copy()
+    permuted = list(np.random.permutation(permute))
+    permuted.insert(0, listPoint[0])
+
+    listPoint = permuted
+    
     reversePoint = listPoint.copy()
     reversePoint.reverse()
 
@@ -119,14 +125,13 @@ def convertConvex(filename):
 
 #============= Setup variable
 begin = 0
-end = 'b'
+end = 1999
 #=============
 start = 0
 des = 0 
-Point, graph = convertConvex("data.txt")
+Point, graph = convertConvex("2000node.txt")
 n = len(Point)
-print(Point)
-print(graph)
+
 for i in range(n):
     if Point[i] == str(begin):
         start = i;

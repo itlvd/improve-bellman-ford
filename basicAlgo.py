@@ -70,12 +70,12 @@ def convertConvex(filename):
     return Point, graph
 
 #============= Setup variable
-begin = "s"
-end = "e"
+begin = 0
+end = 199
 #=============
 start = 0
 des = 0 
-Point, graph = convertConvex("2000node.txt")
+Point, graph = convertConvex("200node.txt")
 n = len(Point)
 for i in range(n):
     if Point[i] == str(begin):
@@ -85,6 +85,6 @@ for i in range(n):
 
 D, P = basicBellmanFord(start,graph,n)
 #print_solution(P,D,Point)
-#printPath(start,des,P,D,Point)
+printPath(start,des,P,D,Point)
 #print(Point)
 

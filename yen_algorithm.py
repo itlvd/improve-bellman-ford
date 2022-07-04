@@ -122,6 +122,7 @@ end = 155
 start = 0
 des = 0 
 Point, graph = convertConvex("200node.txt")
+
 n = len(Point)
 for i in range(n):
     if Point[i] == str(begin):

@@ -100,6 +100,7 @@ def early_termination(start, graph, n):
 #============= Setup variable
 begin = 0
 end = 155
+
 #=============
 start = 0
 des = 0 

@@ -1,7 +1,10 @@
+
 def relax(D, P,s,d,w):
     if D[s] != float("Inf") and D[d] > D[s] + w:
         D[d] = D[s] + w
         P[d] = s
+        return True
+    return False
 
 def print_solution(Previous,dist, Point):
     print("From source")
@@ -24,14 +27,55 @@ def printPath(s,d,P,D,Point):
     path += str(Point[s])[::-1]
     print(path[::-1], "length =", D[d])
 
-
-def basicBellmanFord(start,graph, n):
+def Yen(start, graph, n):
     D = [float("Inf")] * n
     P = [-1] * n
     D[start] = 0
-    for _ in range(len(D) - 1):
-        for s,d,w in graph:
-            relax(D,P,s,d,w)
+    C = [start]
+
+    FlagChange = [False] * n #Flag change iteration before 
+    FlagChange[start] = True
+
+    listPoint = list(range(n)) # node
+    tmp = listPoint[0] #swap
+    listPoint[0] = listPoint[start]
+    listPoint[start] = tmp
+
+    reversePoint = listPoint.copy()
+    reversePoint.reverse()
+
+    visited = [False] * n #kiem tra xem node da di qua chua, neu da di qua roi, thi khong quay lai, do thu tu topo khong cho phep
+    visited[start] = True
+    
+    while len(C) > 0:
+        C_new = []
+        for i, u in zip(range(n),listPoint):
+            if(u in C or FlagChange[u] == True): # Co trong C hay co thay doi o vong while truoc khong
+                FlagChange[u] = False
+                visited[u] = True
+                for s,d,w in graph:
+                    if(u == s and visited[d] == False): # Check ton tai canh nay khong
+                        flag = relax(D,P,u,d,w)
+                        if(flag == True):
+                            FlagChange[d] = True
+                            if d not in C_new: 
+                                C_new.append(d)
+        visited = [False] * n
+
+        for i, u in zip(range(n),reversePoint):
+            if(u in C or FlagChange[u] == True): # Co trong C hay co thay doi o vong while truoc khong
+                FlagChange[u] = False
+                visited[u] = True
+                for s,d,w in graph:
+                    if(u == s and visited[d] == False): # Check ton tai canh nay khong
+                        flag = relax(D,P,u,d,w)
+                        if(flag == True):
+                            FlagChange[d] = True
+                            if d not in C_new:
+                                C_new.append(d)
+        C = C_new
+        visited = [False] * n
+    
     return D, P
 
 def convertConvex(filename):
@@ -67,6 +111,8 @@ def convertConvex(filename):
                 s = id_[start]
                 d = id_[end]
                 graph.append([s,d,w])
+
+
     return Point, graph
 
 #============= Setup variable
@@ -75,7 +121,8 @@ end = 199
 #=============
 start = 0
 des = 0 
-Point, graph = convertConvex("200node.txt")
+Point, graph = convertConvex("./data_demo/200node.txt")
+
 n = len(Point)
 for i in range(n):
     if Point[i] == str(begin):
@@ -83,8 +130,6 @@ for i in range(n):
     if Point[i] == str(end):
         des = i;
 
-D, P = basicBellmanFord(start,graph,n)
-#print_solution(P,D,Point)
+D, P = Yen(start,graph,n)
 printPath(start,des,P,D,Point)
-#print(Point)
-
+#print_solution(P,D,Point)

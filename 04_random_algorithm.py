@@ -1,3 +1,4 @@
+import numpy as np
 
 def relax(D, P,s,d,w):
     if D[s] != float("Inf") and D[d] > D[s] + w:
@@ -41,6 +42,12 @@ def Yen(start, graph, n):
     listPoint[0] = listPoint[start]
     listPoint[start] = tmp
 
+    permute = listPoint[1:].copy() #permutation the list point
+    permuted = list(np.random.permutation(permute))
+    permuted.insert(0, listPoint[0])
+
+    listPoint = permuted
+    
     reversePoint = listPoint.copy()
     reversePoint.reverse()
 
@@ -52,9 +59,9 @@ def Yen(start, graph, n):
         for i, u in zip(range(n),listPoint):
             if(u in C or FlagChange[u] == True): # Co trong C hay co thay doi o vong while truoc khong
                 FlagChange[u] = False
+                visited[u] = True
                 for s,d,w in graph:
                     if(u == s and visited[d] == False): # Check ton tai canh nay khong
-                        visited[u] = True
                         flag = relax(D,P,u,d,w)
                         if(flag == True):
                             FlagChange[d] = True
@@ -65,9 +72,9 @@ def Yen(start, graph, n):
         for i, u in zip(range(n),reversePoint):
             if(u in C or FlagChange[u] == True): # Co trong C hay co thay doi o vong while truoc khong
                 FlagChange[u] = False
+                visited[u] = True
                 for s,d,w in graph:
                     if(u == s and visited[d] == False): # Check ton tai canh nay khong
-                        visited[u] = True
                         flag = relax(D,P,u,d,w)
                         if(flag == True):
                             FlagChange[d] = True
@@ -117,13 +124,13 @@ def convertConvex(filename):
 
 #============= Setup variable
 begin = 0
-end = 1999
+end = 199
 #=============
 start = 0
 des = 0 
-Point, graph = convertConvex("2000node.txt")
-
+Point, graph = convertConvex("./data_demo/200node.txt")
 n = len(Point)
+
 for i in range(n):
     if Point[i] == str(begin):
         start = i;

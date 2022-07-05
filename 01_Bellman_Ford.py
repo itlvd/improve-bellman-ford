@@ -1,4 +1,3 @@
-
 def relax(D, P,s,d,w):
     if D[s] != float("Inf") and D[d] > D[s] + w:
         D[d] = D[s] + w
@@ -24,8 +23,6 @@ def printPath(s,d,P,D,Point):
             return
     path += str(Point[s])[::-1]
     print(path[::-1], "length =", D[d])
-
-
 
 
 def basicBellmanFord(start,graph, n):
@@ -72,39 +69,13 @@ def convertConvex(filename):
                 graph.append([s,d,w])
     return Point, graph
 
-
-def early_termination(start, graph, n):
-    D = [float("Inf")] * n
-    P = [-1] * n
-    D[start] = 0
-    C = [start]
-    while C!= None: 
-        C_new = []
-        for vertex in C:
-            for edge in graph:
-                if edge[0] != vertex:
-                    continue
-                temp = D[edge[1]]
-                relax(D, P, edge[0], edge[1], edge[2])
-                if temp != D[edge[1]]:
-                    C_new.append(edge[1])
-        if len(C_new) != 0:
-            C = C_new
-        else:
-            C = None
-    
-    return D, P
-    
-        
-
 #============= Setup variable
 begin = 0
-end = 1999
-
+end = 199
 #=============
 start = 0
 des = 0 
-Point, graph = convertConvex("2000node.txt")
+Point, graph = convertConvex("./data_demo/200node.txt")
 n = len(Point)
 for i in range(n):
     if Point[i] == str(begin):
@@ -112,7 +83,8 @@ for i in range(n):
     if Point[i] == str(end):
         des = i;
 
-D, P = early_termination(start,graph,n)
-printPath(start,des,P,D,Point)
+D, P = basicBellmanFord(start,graph,n)
 #print_solution(P,D,Point)
+printPath(start,des,P,D,Point)
+#print(Point)
 

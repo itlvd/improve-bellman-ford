@@ -43,7 +43,7 @@ begin = 0 # Start vertex.
 end = 199 # Destination vertex.
 #=============
 ```
-If your data does not a number, like 'a->b=3'. You must to change variable to string `begin = 'a'`
+If your data does not a number, like `a->b=3`. You must to change variable to string `begin = 'a'`
 #### Function
 ```python
 print_solution(P,D,Point)              # Printing all shortest path from start vertex to another vertex.

@@ -9,12 +9,14 @@ This is consists of 4 versions of shortest path algorithms:
 
 ## Data
 ### Data Type
-I save the data with edge, does not the adj matrix. The input data look like: `u->v=w`
+I save the data with edge in text file, does not the adj matrix. The input data look like: `u->v=w`
 - `u` from vertex
 - `v` destination vertex
 - `w` weight of edge `u->v`
 
 But you can customize the data for your purpose. I used the format `u->v=w` because it's easy to present to another to understand and don't mistake.
+
+In the program, data save with `[[u1,v1,w1],[u2,v2,w2],...]`
 
 ### Generate graph
 The code generate graph based on NetworkX:

@@ -40,10 +40,13 @@ wantdraw = False        # Selecting `True`, if you want to plot the undirected g
 #### Variable
 You can find the variable in algorithm python file:
 ```python
-#============= Setup variable
-begin = 0 # Start vertex.
-end = 199 # Destination vertex.
-#=============
+#============= Setup variable =======================
+begin = 0
+end = 199
+path_data = "./data_demo/200node.txt" # path your data file.
+print_shortest_path = True;           # print shortest path from `begin` to `end`
+print_all_solution = False;           # print shortest path from `begin` to all vertex.
+#====================================================
 ```
 If your data does not a number, like `a->b=3`. You must to change variable to string `begin = 'a'`
 #### Function

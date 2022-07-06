@@ -1,4 +1,10 @@
-
+#============= Setup variable =======================
+begin = 0
+end = 199
+path_data = "./data_demo/200node.txt"
+print_shortest_path = False;
+print_all_solution = True;
+#====================================================
 def relax(D, P,s,d,w):
     if D[s] != float("Inf") and D[d] > D[s] + w:
         D[d] = D[s] + w
@@ -7,11 +13,19 @@ def relax(D, P,s,d,w):
 def print_solution(Previous,dist, Point):
     print("From source")
     print("to\tprevious\tmin distance")
+    tmp_list = []
+    isnum = Point[0].isnumeric()
     for i in range(len(Point)):
         pre = Point[Previous[i]]
         if(Previous[i] == -1):
             pre = -1
-        print(Point[i], '\t', pre, '\t\t\t\t', dist[i])
+        if isnum != True:
+            tmp_list.append([Point[i], pre, dist[i]])
+        else:
+            tmp_list.append([int(Point[i]), pre, dist[i]])
+    tmp_list.sort(key  = lambda x:x[0])
+    for point, p, d in tmp_list:
+        print("{0:10}{0:10}{1}".format(str(point),p,d))
 
 def printPath(s,d,P,D,Point):
     now = d
@@ -94,16 +108,10 @@ def early_termination(start, graph, n):
             C = None
     
     return D, P
-    
-        
 
-#============= Setup variable
-begin = 0
-end = 199
-#=============
 start = 0
 des = 0 
-Point, graph = convertConvex("./data_demo/200node.txt")
+Point, graph = convertConvex(path_data)
 n = len(Point)
 for i in range(n):
     if Point[i] == str(begin):
@@ -112,6 +120,8 @@ for i in range(n):
         des = i;
 
 D, P = early_termination(start,graph,n)
-printPath(start,des,P,D,Point)
-#print_solution(P,D,Point)
 
+if print_shortest_path == True:
+    printPath(start,des,P,D,Point)
+if print_all_solution == True:
+    print_solution(P,D,Point)

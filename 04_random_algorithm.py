@@ -58,9 +58,8 @@ def Randomize(start, graph, n):
     listPoint = random.sample(range(0, n), n) # node
     idx = listPoint.index(start)
     listPoint[0],listPoint[idx] = listPoint[idx],listPoint[0]
-    tmp = listPoint[0] #swap
-    listPoint[0] = listPoint[start]
-    listPoint[start] = tmp
+
+    listPoint[0], listPoint[start] = listPoint[start], listPoint[0] #swap
 
     reversePoint = listPoint.copy()
     reversePoint.reverse()

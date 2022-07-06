@@ -54,9 +54,7 @@ def Yen(start, graph, n):
     FlagChange[start] = True
 
     listPoint = list(range(n)) # node
-    tmp = listPoint[0] #swap
-    listPoint[0] = listPoint[start]
-    listPoint[start] = tmp
+    listPoint[0], listPoint[start] = listPoint[start], listPoint[0] #swap
 
     reversePoint = listPoint.copy()
     reversePoint.reverse()

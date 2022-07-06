@@ -117,7 +117,7 @@ def convertConvex(filename):
 
 #============= Setup variable
 begin = 0
-end = 199
+end = 99
 #=============
 start = 0
 des = 0 

@@ -1,5 +1,4 @@
-import numpy as np
-
+import random
 def relax(D, P,s,d,w):
     if D[s] != float("Inf") and D[d] > D[s] + w:
         D[d] = D[s] + w
@@ -28,7 +27,7 @@ def printPath(s,d,P,D,Point):
     path += str(Point[s])[::-1]
     print(path[::-1], "length =", D[d])
 
-def Yen(start, graph, n):
+def Randomize(start, graph, n):
     D = [float("Inf")] * n
     P = [-1] * n
     D[start] = 0
@@ -37,17 +36,13 @@ def Yen(start, graph, n):
     FlagChange = [False] * n #Flag change iteration before 
     FlagChange[start] = True
 
-    listPoint = list(range(n)) # node
+    listPoint = random.sample(range(0, n), n) # node
+    idx = listPoint.index(start)
+    listPoint[0],listPoint[idx] = listPoint[idx],listPoint[0]
     tmp = listPoint[0] #swap
     listPoint[0] = listPoint[start]
     listPoint[start] = tmp
 
-    permute = listPoint[1:].copy() #permutation the list point
-    permuted = list(np.random.permutation(permute))
-    permuted.insert(0, listPoint[0])
-
-    listPoint = permuted
-    
     reversePoint = listPoint.copy()
     reversePoint.reverse()
 
@@ -124,11 +119,11 @@ def convertConvex(filename):
 
 #============= Setup variable
 begin = 0
-end = 199
+end = 99
 #=============
 start = 0
 des = 0 
-Point, graph = convertConvex("./data_demo/200node.txt")
+Point, graph = convertConvex("./data_demo/50node.txt")
 n = len(Point)
 
 for i in range(n):
@@ -137,6 +132,6 @@ for i in range(n):
     if Point[i] == str(end):
         des = i;
 
-D, P = Yen(start,graph,n)
+D, P = Randomize(start,graph,n)
 printPath(start,des,P,D,Point)
 #print_solution(P,D,Point)

@@ -1,7 +1,7 @@
 #============= Setup variable =======================
 begin = 0
 end = 199
-path_data = "./data_demo/data.txt"
+path_data = "./data_demo/200node.txt"
 print_shortest_path = False;
 print_all_solution = True;
 #====================================================
@@ -13,7 +13,8 @@ def relax(D, P,s,d,w):
 
 def print_solution(Previous,dist, Point):
     print("From source")
-    print("to\tprevious\tmin distance")
+    print("|    to    previous   min_distance |")
+    print("|----------------------------------|")
     tmp_list = []
     isnum = Point[0].isnumeric()
     for i in range(len(Point)):
@@ -26,7 +27,8 @@ def print_solution(Previous,dist, Point):
             tmp_list.append([int(Point[i]), pre, dist[i]])
     tmp_list.sort(key  = lambda x:x[0])
     for point, p, d in tmp_list:
-        print("{0:10}{0:10}{1}".format(str(point),p,d))
+        print("|{0}{1}{2}|".format(str(point).center(10),str(p).center(10),str(d).center(14)))
+        print("|----------------------------------|")
 
 def printPath(s,d,P,D,Point):
     now = d

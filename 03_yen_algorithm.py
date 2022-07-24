@@ -1,8 +1,8 @@
 #============= Setup variable =======================
 begin = 0
 end = 199
-path_data = "./data_demo/200node.txt"
-print_shortest_path = True;
+path_data = "./data_demo/2000node.txt"
+print_shortest_path = False;
 print_all_solution = False;
 #====================================================
 
@@ -65,11 +65,11 @@ def Yen(start, graph, n):
     while len(C) > 0:
         C_new = []
         for i, u in zip(range(n),listPoint):
+            visited[u] = True
             if(u in C or FlagChange[u] == True): # Co trong C hay co thay doi o vong while truoc khong
                 FlagChange[u] = False
-                visited[u] = True
                 for s,d,w in graph:
-                    if(u == s and visited[d] == False): # Check ton tai canh nay khong
+                    if(u == s and visited[d] == False): # Check ton tai canh nay khong, do sap xep theo 0,1,2,... nen khong can xet topo
                         flag = relax(D,P,u,d,w)
                         if(flag == True):
                             FlagChange[d] = True
@@ -78,9 +78,9 @@ def Yen(start, graph, n):
         visited = [False] * n
 
         for i, u in zip(range(n),reversePoint):
+            visited[u] = True
             if(u in C or FlagChange[u] == True): # Co trong C hay co thay doi o vong while truoc khong
                 FlagChange[u] = False
-                visited[u] = True
                 for s,d,w in graph:
                     if(u == s and visited[d] == False): # Check ton tai canh nay khong
                         flag = relax(D,P,u,d,w)

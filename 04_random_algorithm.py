@@ -3,8 +3,8 @@ import random
 #============= Setup variable =======================
 begin = 0
 end = 199
-path_data = "./data_demo/200node.txt"
-print_shortest_path = True;
+path_data = "./data_demo/2000node.txt"
+print_shortest_path = False;
 print_all_solution = False;
 #====================================================
 
@@ -64,37 +64,33 @@ def Randomize(start, graph, n):
     reversePoint = listPoint.copy()
     reversePoint.reverse()
 
-    visited = [False] * n #kiem tra xem node da di qua chua, neu da di qua roi, thi khong quay lai, do thu tu topo khong cho phep
-    visited[start] = True
-    
+    listPoint = dict(zip(listPoint,range(n)))
+    reversePoint = dict(zip(reversePoint,range(n)))
     while len(C) > 0:
         C_new = []
-        for i, u in zip(range(n),listPoint):
+        for u in listPoint:
             if(u in C or FlagChange[u] == True): # Co trong C hay co thay doi o vong while truoc khong
                 FlagChange[u] = False
-                visited[u] = True
                 for s,d,w in graph:
-                    if(u == s and visited[d] == False): # Check ton tai canh nay khong
+                    if(u == s and listPoint[d] > listPoint[u]): # Check ton tai canh nay khong
                         flag = relax(D,P,u,d,w)
                         if(flag == True):
                             FlagChange[d] = True
                             if d not in C_new: 
                                 C_new.append(d)
-        visited = [False] * n
 
-        for i, u in zip(range(n),reversePoint):
+        for u in reversePoint:
             if(u in C or FlagChange[u] == True): # Co trong C hay co thay doi o vong while truoc khong
                 FlagChange[u] = False
-                visited[u] = True
                 for s,d,w in graph:
-                    if(u == s and visited[d] == False): # Check ton tai canh nay khong
+
+                    if(u == s and reversePoint[d] > reversePoint[u]): # Check ton tai canh nay khong
                         flag = relax(D,P,u,d,w)
                         if(flag == True):
                             FlagChange[d] = True
                             if d not in C_new:
                                 C_new.append(d)
         C = C_new
-        visited = [False] * n
     
     return D, P
 

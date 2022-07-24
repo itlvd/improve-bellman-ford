@@ -1,8 +1,8 @@
 #============= Setup variable =======================
 begin = 0
 end = 199
-path_data = "./data_demo/200node.txt"
-print_shortest_path = True;
+path_data = "./data_demo/2000node.txt"
+print_shortest_path = False;
 print_all_solution = False;
 #====================================================
 def relax(D, P,s,d,w):

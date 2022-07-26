@@ -1,7 +1,7 @@
 #============= Setup variable =======================
 begin = 0
 end = 199
-path_data = "./data_demo/2000node.txt"
+path_data = "./data_demo/200node.txt"
 print_shortest_path = False;
 print_all_solution = False;
 #====================================================
@@ -41,17 +41,6 @@ def printPath(s,d,P,D,Point):
     path += str(Point[s])[::-1]
     print(path[::-1], "length =", D[d])
 
-
-
-
-def basicBellmanFord(start,graph, n):
-    D = [float("Inf")] * n
-    P = [-1] * n
-    D[start] = 0
-    for _ in range(len(D) - 1):
-        for s,d,w in graph:
-            relax(D,P,s,d,w)
-    return D, P
 
 def convertConvex(filename):
     Point = []
@@ -94,7 +83,9 @@ def early_termination(start, graph, n):
     P = [-1] * n
     D[start] = 0
     C = [start]
+    r=0
     while C!= None: 
+        r+=1
         C_new = []
         for vertex in C:
             for edge in graph:
@@ -108,7 +99,7 @@ def early_termination(start, graph, n):
             C = C_new
         else:
             C = None
-    
+    print("Number of loops:",r)
     return D, P
 
 start = 0

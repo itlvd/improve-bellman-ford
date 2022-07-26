@@ -3,7 +3,7 @@ import random
 #============= Setup variable =======================
 begin = 0
 end = 199
-path_data = "./data_demo/2000node.txt"
+path_data = "./data_demo/200node.txt"
 print_shortest_path = False;
 print_all_solution = False;
 #====================================================
@@ -66,7 +66,9 @@ def Randomize(start, graph, n):
 
     listPoint = dict(zip(listPoint,range(n)))
     reversePoint = dict(zip(reversePoint,range(n)))
+    r = 0
     while len(C) > 0:
+        r+=1
         C_new = []
         for u in listPoint:
             if(u in C or FlagChange[u] == True): # Co trong C hay co thay doi o vong while truoc khong
@@ -91,7 +93,7 @@ def Randomize(start, graph, n):
                             if d not in C_new:
                                 C_new.append(d)
         C = C_new
-    
+    print("Number of loops:",r)
     return D, P
 
 def convertConvex(filename):

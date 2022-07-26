@@ -1,7 +1,7 @@
 #============= Setup variable =======================
 begin = 0
 end = 199
-path_data = "./data_demo/2000node.txt"
+path_data = "./data_demo/200node.txt"
 print_shortest_path = False;
 print_all_solution = False;
 #====================================================
@@ -61,8 +61,9 @@ def Yen(start, graph, n):
 
     visited = [False] * n #kiem tra xem node da di qua chua, neu da di qua roi, thi khong quay lai, do thu tu topo khong cho phep
     visited[start] = True
-    
+    r = 0
     while len(C) > 0:
+        r+=1
         C_new = []
         for i, u in zip(range(n),listPoint):
             visited[u] = True
@@ -90,7 +91,7 @@ def Yen(start, graph, n):
                                 C_new.append(d)
         C = C_new
         visited = [False] * n
-    
+    print("Number of loops:",r)
     return D, P
 
 def convertConvex(filename):

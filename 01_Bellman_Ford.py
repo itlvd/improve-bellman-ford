@@ -47,9 +47,12 @@ def basicBellmanFord(start,graph, n):
     D = [float("Inf")] * n
     P = [-1] * n
     D[start] = 0
+    r=0
     for _ in range(len(D) - 1):
+        r+=1
         for s,d,w in graph:
             relax(D,P,s,d,w)
+    print("Number of loops:", r)
     return D, P
 
 def convertConvex(filename):

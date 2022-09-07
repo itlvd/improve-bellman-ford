@@ -55,5 +55,8 @@ print_solution(P,D,Point)              # Printing all shortest path from start v
 printPath(start,des,P,D,Point)         # Printing shortest path from start vertex to destination vertex which you setup above.
 ```
 
+## License
+[MIT License](https://github.com/itlvd/improve-bellman-ford/blob/main/LICENSE)
+
 ## Reference
 [Randomized Speedup of the Bellman-Ford Algorithm](https://arxiv.org/abs/1111.5414)

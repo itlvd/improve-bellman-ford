@@ -55,6 +55,24 @@ print_solution(P,D,Point)              # Printing all shortest path from start v
 printPath(start,des,P,D,Point)         # Printing shortest path from start vertex to destination vertex which you setup above.
 ```
 
+# Evaluation
+
+To be objective, the test did not run different programs during the test. I tried running three times. Results ± 20 seconds and then averaged.
+
+**Machine**
+- Core i5 - 4570 @ 3.20 Hz (4 CPUs).
+- Ram: 16GB.
+- Windows 11 Pro.
+- Main H81 Gigabyte.
+
+**Metric**: time to run (seconds)
+
+| Data (Nodes - Edges) |        Bell       |      Terminate      |        Yen        |       Random      |
+|:--------------------:|:-----------------:|:-------------------:|:-----------------:|:-----------------:|
+|       50 - 529       |       0.092       |        0.086        |       0.096       |       0.091       |
+|      200 - 8952      |       0.842       |        0.359        |       0.536       |       0.620       |
+|      2000 ~ 1 M      | 895.411  ~ 14 min | 332.254  ~ 5 m 30 s | 295.318 ~ 4 m 54s | 345.726 ~ 5 m 45s |
+
 ## License
 [MIT License](https://github.com/itlvd/improve-bellman-ford/blob/main/LICENSE)
 
